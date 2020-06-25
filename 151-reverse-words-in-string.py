@@ -20,9 +20,3 @@ def reverseWordsTwo(s):
             res += word+' '
         i = j
     return res[:-1]
-
-
-
-
-s = '     a    good   example    '
-print(reverseWordsTwo(s), len(reverseWordsTwo(s)))
