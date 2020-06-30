@@ -13,3 +13,4 @@ def firstBadVersion(n):
           else:
             hi = mid
         return n
+        
