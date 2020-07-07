@@ -1,4 +1,5 @@
 from datetime import datetime
+
 class Twitter:
 
     def __init__(self):
@@ -7,6 +8,8 @@ class Twitter:
         
 
     def postTweet(self, userId: int, tweetId: int) -> None:
+        if userId not in self.users:
+            self.users[userId] = {'following': set()}
         self.tweets.append({
             'user_id': userId,
             'tweet_id': tweetId,
@@ -15,9 +18,14 @@ class Twitter:
         
 
     def getNewsFeed(self, userId: int) -> list:
-        """
-        Retrieve the 10 most recent tweet ids in the user's news feed. Each item in the news feed must be posted by users who the user followed or by the user herself. Tweets must be ordered from most recent to least recent.
-        """
+        if userId not in self.users:
+            return []
+        news_feed = sorted([t for t in self.tweets 
+                     if t['user_id'] == userId
+                     or t['user_id'] in self.users[userId]['following']],
+                     reverse=True,
+                     key=lambda x: x['date'])
+        return [t['tweet_id'] for t in news_feed][:10]
         
 
     def follow(self, followerId: int, followeeId: int) -> None:
@@ -36,13 +44,3 @@ class Twitter:
             or followeeId not in self.users[followerId]['following']):
             return
         self.users[followerId]['following'].remove(followeeId)
-
-twitter = Twitter()
-twitter.postTweet(1,1)
-twitter.postTweet(1,2)
-twitter.follow(1,2)
-twitter.follow(1,3)
-twitter.follow(2,1)
-twitter.unfollow(1,3)
-
-print(twitter.users)
