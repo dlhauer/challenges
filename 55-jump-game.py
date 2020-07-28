@@ -1,4 +1,4 @@
-def canJump(nums):
+def canJump1(nums):
     start_points = dict()
 
     def helper(start):
@@ -12,7 +12,9 @@ def canJump(nums):
 
     return helper(0)
 
-nums = [i for i in range(25000,0,-1)]
-nums.append(0)
-nums.append(1)
-print(canJump(nums))
+def canJump2(nums):
+    last_pos = len(nums)-1
+    for i in range(len(nums)-1, -1, -1):
+        if i+nums[i] >= last_pos:
+            last_pos = i
+    return last_pos == 0
