@@ -16,6 +16,3 @@ def evalRPN(tokens):
         else:
             stack.append(int(token))
     return int(stack[0])
-
-tokens = ["10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"]
-print(evalRPN(tokens))
