@@ -4,6 +4,9 @@ import "fmt"
 
 func generate(numRows int) [][]int {
 	var rows [][]int
+	if numRows == 0 {
+		return rows
+	}
 	rows = append(rows, []int{1})
 	for i := 1; i < numRows; i++ {
 		var row []int
